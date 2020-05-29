@@ -1,0 +1,6 @@
+{
+ "projectName": {"S": "TZ"},
+ "projectType": {"S": "billing"},
+ "memberName": {"S": "hongxing"},
+ "startDate": {"S": "2020-02"}
+}

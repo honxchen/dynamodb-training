@@ -1,0 +1,62 @@
+{
+  "Project_hongxing": [
+    {
+      "PutRequest": {
+        "Item": {
+          "projectName": {"S": "SZ"},
+          "code": {"N": "201"},
+          "projectType": {"S": "billingSZ"},
+          "memberName": {"S": "hongxingSZ"},
+          "startDate": {"S": "2020-02"},
+          "profile": {"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"},
+          "detail": {"M": {"Name": {"S": "hongxing"}, "Age": {"N": "18"}}}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "projectName": {"S": "TZ"},
+          "code": {"N": "202"},
+          "projectType": {"S": "billingSZ"},
+          "memberName": {"S": "hongxingSZ"},
+          "startDate": {"S": "2020-02"},
+          "profile": {"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"},
+          "detail": {"M": {"Name": {"S": "hongxing"}, "Age": {"N": "18"}}}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "projectName": {"S": "A"},
+          "projectType": {"S": "billingA"},
+          "memberName": {"S": "hongxingA"},
+          "startDate": {"S": "2020-02"},
+          "error": {"NULL": true}
+        }
+
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "projectName": {"S": "B"},
+          "projectType": {"S": "billingB"},
+          "memberName": {"S": "hongxingB"},
+          "startDate": {"S": "2020-02"},
+          "exist": {"BOOL": true}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "projectName": {"S": "C"},
+          "projectType": {"S": "billingC"},
+          "members" : {"SS":["lou", "chen"]}
+        }
+      }
+    }
+  ]
+}
