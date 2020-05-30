@@ -44,11 +44,16 @@ aws dynamodb query  --table-name Project_hongxing --index-name=memberNameIndex \
 
 
 Q：
-收费模式以及默认方式
-什么时候开始限流
-是不是默认autoscaling是不是默认的
-默认的流量是多少
-加密
-数据类型： S-String，B-Binary, N-Number
-如果有一个Global Index,是不是代表全局的memberkey只能有一个？put的时候是否会失败
-Index的attr，是不是代表attr都是必须的
+* 收费模式以及默认方式
+* 什么时候开始限流
+* 是不是默认autoscaling是不是默认的
+* 默认的流量是多少
+* 加密
+* 数据类型： S-String，B-Binary, N-Number
+* 如果有一个Global Index,是不是代表全局的memberkey只能有一个？put的时候是否会失败
+* Index的attr，是不是代表attr都是必须的
+* ProjectionExpression: return only some of the attributes.
+* KeyConditionExpression: parameter specifies the key values that you want to query
+* ExpressionAttributeValues: This is analogous to the use of bind variables in relational databases, where you substitute the actual values into the SELECT statement at runtime.
+* FilterExpression: remove certain items from the results before they are returned to you.
+
