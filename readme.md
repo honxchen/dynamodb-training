@@ -1,3 +1,19 @@
+## setup
+```
+docker run -p 8000:8000 amazon/dynamodb-local
+
+aws dynamodb create-table --endpoint-url http://localhost:8000 \
+    --table-name Project_hongxing \
+    --attribute-definitions AttributeName=projectName,AttributeType=S AttributeName=projectType,AttributeType=S \
+    --key-schema AttributeName=projectName,KeyType=HASH AttributeName=projectType,KeyType=RANGE \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+
+ ./gradlew bootRun
+```
+
+
+
+
 1. describe
 ```
 aws dynamodb   describe-table --table-name Project_hongxing
@@ -56,4 +72,4 @@ Q：
 * KeyConditionExpression: parameter specifies the key values that you want to query
 * ExpressionAttributeValues: This is analogous to the use of bind variables in relational databases, where you substitute the actual values into the SELECT statement at runtime.
 * FilterExpression: remove certain items from the results before they are returned to you.
-
+* https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
