@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -23,14 +22,34 @@ public class ProjectController {
             .withCredentials(profileCredentialsProvider).build();
     private String projectTable = "Project_hongxing";
 
+
+    @RequestMapping(value = "/project", method = POST)
+    public TransactWriteItemsResult createItem(@RequestBody Map<String, AttributeValue> item) {
+        Put createProject = new Put()
+                .withTableName(projectTable)
+                .withItem(item)
+                .withReturnValuesOnConditionCheckFailure(ReturnValuesOnConditionCheckFailure.ALL_OLD)
+                .withConditionExpression("attribute_not_exists(projectName)");
+        Collection<TransactWriteItem> actions = Arrays.asList(
+                new TransactWriteItem().withPut(createProject));
+
+        TransactWriteItemsRequest request = new TransactWriteItemsRequest()
+                .withTransactItems(actions)
+                .withReturnConsumedCapacity(ReturnConsumedCapacity.TOTAL);
+        try {
+            return client.transactWriteItems(request);
+        } catch (ResourceNotFoundException rnf) {
+            throw new RuntimeException("One of the table involved in the transaction is not found" + rnf.getMessage());
+        } catch (InternalServerErrorException ise) {
+            throw new RuntimeException("Internal Server Error" + ise.getMessage());
+        } catch (TransactionCanceledException tce) {
+            throw new RuntimeException("Transaction Canceled " + tce.getMessage());
+        }
+    }
+
     @RequestMapping(value = "/project", method = PUT)
-    public BatchWriteItemResult putItem(@RequestBody List<Map<String, AttributeValue>> items) {
-        List<WriteRequest> writeRequests = items.stream()
-                .map(item -> new PutRequest(item))
-                .map(putRequest -> new WriteRequest(putRequest))
-                .collect(Collectors.toList());
-        BatchWriteItemRequest request = new BatchWriteItemRequest().addRequestItemsEntry(projectTable, writeRequests);
-        return client.batchWriteItem(request);
+    public PutItemResult putItem(@RequestBody Map<String, AttributeValue> item) {
+        return client.putItem(projectTable, item);
     }
 
     @RequestMapping(value = "/project", method = GET)
